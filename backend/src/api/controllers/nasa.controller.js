@@ -31,7 +31,7 @@ exports.getApod = async (req, res, next) => {
         end_date: endDate,
       },
     });
-    sendResponse(response, response.data, "Apod fetched successfully!");
+    sendResponse(res, response.data, "Apod fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -64,7 +64,7 @@ exports.getMarsPhotos = async (req, res, next) => {
         ...(camera && { camera }),
       },
     });
-    sendResponse(response, response.data, "Mars Photos fetched successfully!");
+    sendResponse(res, response.data, "Mars Photos fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -95,7 +95,7 @@ exports.getEpicImages = async (req, res, next) => {
     });
     const data = mapEpicImages(response.data);
 
-    sendResponse(response, data, "Epic Images fetched successfully!");
+    sendResponse(res, data, "Epic Images fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -128,7 +128,7 @@ exports.getNeoFeed = async (req, res, next) => {
         ...(end_date && { end_date }),
       },
     });
-    sendResponse(response, response.data, "Neo Feed fetched successfully!");
+    sendResponse(res, response.data, "Neo Feed fetched successfully!");
   } catch (err) {
     next(err);
   }
