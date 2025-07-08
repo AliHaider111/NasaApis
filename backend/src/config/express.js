@@ -7,7 +7,6 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
-const socketio = require('socket.io');
 
 const routes = require('../api/routes/v1');
 const { logs } = require('./vars');
@@ -15,14 +14,6 @@ const error = require('../api/middlewares/error');
 
 const app = express();
 const server = http.createServer(app);
-
-// Initialize Socket.io and allow CORS
-global.io = socketio(server, {
-  cors: {
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST'],
-  },
-});
 
 // Logging requests
 app.use(morgan(logs));
