@@ -1,4 +1,5 @@
 const { apiHelper } = require("../utils/helper");
+const {nasa_base_url} = require("../../config/vars")
 
 /**
  * Fetches NASA's Astronomy Picture of the Day (APOD) for a given date.
@@ -17,7 +18,7 @@ exports.getApod = async (req, res, next) => {
     const date = req.query.date || new Date().toISOString().split('T')[0];
     const response = await apiHelper({
       method: 'get',
-      url: 'https://api.nasa.gov/planetary/apod',
+      url: `${nasa_base_url}/planetary/apod`,
       params: {
         api_key: process.env.NASA_API_KEY,
         date,
@@ -49,7 +50,7 @@ exports.getMarsPhotos = async (req, res, next) => {
 
     const response = await apiHelper({
       method: 'get',
-      url: `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos`,
+      url: `${nasa_base_url}/mars-photos/api/v1/rovers/${rover}/photos`,
       params: {
         api_key: process.env.NASA_API_KEY,
         sol,
@@ -79,7 +80,7 @@ exports.getEpicImages = async (req, res, next) => {
     const date = req.query.date || new Date().toISOString().split('T')[0];
     const response = await apiHelper({
       method: 'get',
-      url: `https://api.nasa.gov/EPIC/api/natural/date/${date}`,
+      url: `${nasa_base_url}/EPIC/api/natural/date/${date}`,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
@@ -109,7 +110,7 @@ exports.getNeoFeed = async (req, res, next) => {
 
     const response = await apiHelper({
       method: 'get',
-      url: 'https://api.nasa.gov/neo/rest/v1/feed',
+      url: `${nasa_base_url}/neo/rest/v1/feed`,
       params: {
         api_key: process.env.NASA_API_KEY,
         start_date,
@@ -122,33 +123,3 @@ exports.getNeoFeed = async (req, res, next) => {
   }
 };
 
-/**
- * Searches NASA's Image and Video Library using a keyword query and media type filter.
- *
- * @param {Object} req - The Express request object, supports `q` (search query) and `media_type` (image/video/audio).
- * @param {Object} res - The Express response object to send back the media search results.
- *
- * @async
- * @function
- * @throws {Error} Throws an error if the media search API fails.
- *
- * @returns {Promise<void>}
- */
-exports.searchMedia = async (req, res, next) => {
-  try {
-    const query = req.query.q || 'moon';
-    const media_type = req.query.media_type || 'image';
-    const response = await apiHelper({
-      method: 'get',
-      url: `https://images-api.nasa.gov/search`,
-      params: {
-        q: query,
-        media_type,
-      },
-    });
-    console.log(query,media_type)
-    res.json(response.data);
-  } catch (err) {
-    next(err);
-  }
-};

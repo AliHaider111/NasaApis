@@ -22,6 +22,5 @@ router.get('/apod', controller.getApod);
 router.get('/mars-photos', controller.getMarsPhotos);
 router.get('/epic', controller.getEpicImages);
 router.get('/neo-feed', controller.getNeoFeed);
-router.get('/media-search', controller.searchMedia);
 
 module.exports = router;

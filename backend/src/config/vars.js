@@ -7,6 +7,7 @@ require('dotenv-safe').config({
 
 module.exports = {
   env: process.env.NODE_ENV,
+  nasa_base_url: 'https://api.nasa.gov',
   port: process.env.PORT,
   mongo: {
     uri: process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TESTS : process.env.MONGO_URI,
