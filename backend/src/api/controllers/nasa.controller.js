@@ -1,5 +1,5 @@
-const { apiHelper } = require("../utils/helper");
-const {nasa_base_url} = require("../../config/vars")
+const { apiHelper, mapEpicImages } = require("../utils/helper");
+const { nasa_base_url } = require("../../config/vars")
 
 /**
  * Fetches NASA's Astronomy Picture of the Day (APOD) for a given date.
@@ -15,13 +15,20 @@ const {nasa_base_url} = require("../../config/vars")
  */
 exports.getApod = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split('T')[0];
+    const today = new Date();
+    const endDate = today.toISOString().split("T")[0];
+
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 9);
+    const formattedStartDate = startDate.toISOString().split("T")[0];
+
     const response = await apiHelper({
-      method: 'get',
-      url: `${nasa_base_url}/planetary/apod`,
+      method: "get",
+      url: "https://api.nasa.gov/planetary/apod",
       params: {
         api_key: process.env.NASA_API_KEY,
-        date,
+        start_date: formattedStartDate,
+        end_date: endDate,
       },
     });
     res.json(response.data);
@@ -77,15 +84,17 @@ exports.getMarsPhotos = async (req, res, next) => {
  */
 exports.getEpicImages = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split('T')[0];
     const response = await apiHelper({
       method: 'get',
-      url: `${nasa_base_url}/EPIC/api/natural/date/${date}`,
+      url: `${nasa_base_url}/EPIC/api/natural${req.query.date ? `/date/${req.query.date}` : ''}`,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
     });
-    res.json(response.data);
+
+    const data = mapEpicImages(response.data);
+
+    res.json(data);
   } catch (err) {
     next(err);
   }

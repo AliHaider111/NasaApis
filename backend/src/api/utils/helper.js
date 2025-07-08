@@ -48,3 +48,24 @@ exports.apiHelper = async function (config) {
     }
   }
 };
+
+
+const BASE_URL = "https://epic.gsfc.nasa.gov/archive";
+
+exports.mapEpicImages = (data, collection = "natural", type = "png") => {
+  return data?.map((item) => {
+    const id = item.image.match(/\d{14}/)?.[0];
+    const year = id.slice(0, 4);
+    const month = id.slice(4, 6);
+    const day = id.slice(6, 8);
+
+    const ext = type === "png" ? "png" : "jpg";
+
+    const imageUrl = `${BASE_URL}/${collection}/${year}/${month}/${day}/${type}/${item.image}.${ext}`;
+
+    return {
+      ...item,
+      imageUrl,
+    };
+  });
+};
