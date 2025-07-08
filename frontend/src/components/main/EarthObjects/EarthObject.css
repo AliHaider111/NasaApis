@@ -1,0 +1,64 @@
+.neo-wrapper {
+    padding: 2rem;
+    background: #f7f9fa;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .neo-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1d3557;
+  }
+  
+  .neo-date-section {
+    margin-bottom: 3rem;
+  }
+  
+  .neo-date {
+    font-size: 1.5rem;
+    color: #457b9d;
+    margin-bottom: 1rem;
+    border-left: 4px solid #1d3557;
+    padding-left: 0.75rem;
+  }
+  
+  .neo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .neo-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .neo-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .neo-name {
+    font-size: 1.2rem;
+    color: #1d3557;
+    margin-bottom: 0.5rem;
+  }
+  
+  .neo-button {
+    margin-top: 0.5rem;
+    display: inline-block;
+    background: #1d3557;
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+  }
+  
+  .neo-button:hover {
+    background: #457b9d;
+  }
+  
