@@ -1,17 +1,18 @@
-import { FETCH_DATA, ERROR_STATE } from '../actionTypes';
+import { FETCH_MARS_DATA,LOADER, ERROR_STATE } from '../actionTypes';
 
 const initialState = {
-   apod: {},
+   marsRover: {},
    success: false,
+   loader: false,
    error: false,
 }
 
-const apodReducer = (state = initialState, action) => {
+const marsReducer = (state = initialState, action) => {
    switch (action.type) {
-      case FETCH_DATA:
+      case FETCH_MARS_DATA:
          return {
             ...state,
-            apod: action.payload,
+            marsRover: action.payload,
          }
       case ERROR_STATE:
          return {
@@ -23,4 +24,4 @@ const apodReducer = (state = initialState, action) => {
    }
 }
 
-export default apodReducer
+export default marsReducer

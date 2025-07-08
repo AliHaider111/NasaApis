@@ -1,15 +1,15 @@
-import { FETCH_DATA, LOADER, ERROR_STATE } from "../actionTypes";
+import { FETCH_MARS_DATA,LOADER, ERROR_STATE } from "../actionTypes";
 import { toast } from "react-toastify";
 import { apiHelper } from "../axios_intence"
 
-export const FetchApod = (date) => async (dispatch) => {
+export const FetchMarsRover = (camera) => async (dispatch) => {
   try {
-    let res = await apiHelper("get", `/apod?date=${date}`)
+    let res = await apiHelper("get", `/nasa/mars-photos?camera='RHAZ'&sol=900&rover=curiosity`)
     if (res?.data) {
       let { data } = res
       toast.success(data?.message)
       dispatch({
-        type: FETCH_DATA,
+        type: FETCH_MARS_DATA,
         payload: data
       })
     }
