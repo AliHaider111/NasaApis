@@ -1,8 +1,7 @@
 import { FETCH_DATA, LOADER_STATE } from '../actionTypes';
 
 const initialState = {
-   apod: {},
-   success: false,
+   apod: [],
    loader: false,
 }
 

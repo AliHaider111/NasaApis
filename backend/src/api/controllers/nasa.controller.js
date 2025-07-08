@@ -1,4 +1,4 @@
-const { apiHelper, sendResponse } = require("../utils/helper");
+const { apiHelper, sendResponse, mapEpicImages } = require("../utils/helper");
 const { nasa_base_url } = require("../../config/vars");
 
 /**
@@ -15,16 +15,23 @@ const { nasa_base_url } = require("../../config/vars");
  */
 exports.getApod = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split("T")[0];
+    const today = new Date();
+    const endDate = today.toISOString().split("T")[0];
+
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 9);
+    const formattedStartDate = startDate.toISOString().split("T")[0];
+
     const response = await apiHelper({
       method: "get",
       url: `${nasa_base_url}/planetary/apod`,
       params: {
         api_key: process.env.NASA_API_KEY,
-        date,
+        start_date: formattedStartDate,
+        end_date: endDate,
       },
     });
-    sendResponse(response, response.data, "Apod fetched successfully!")
+    sendResponse(response, response.data, "Apod fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -57,8 +64,7 @@ exports.getMarsPhotos = async (req, res, next) => {
         ...(camera && { camera }),
       },
     });
-    sendResponse(response, response.data, "Mars Photos fetched successfully!")
-
+    sendResponse(response, response.data, "Mars Photos fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -78,16 +84,18 @@ exports.getMarsPhotos = async (req, res, next) => {
  */
 exports.getEpicImages = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split("T")[0];
     const response = await apiHelper({
       method: "get",
-      url: `${nasa_base_url}/EPIC/api/natural/date/${date}`,
+      url: `${nasa_base_url}/EPIC/api/natural${
+        req.query.date ? `/date/${req.query.date}` : ""
+      }`,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
     });
-    sendResponse(response, response.data, "Epic Images fetched successfully!")
+    const data = mapEpicImages(response.data);
 
+    sendResponse(response, data, "Epic Images fetched successfully!");
   } catch (err) {
     next(err);
   }
@@ -120,8 +128,7 @@ exports.getNeoFeed = async (req, res, next) => {
         ...(end_date && { end_date }),
       },
     });
-    sendResponse(response, response.data, "Neo Feed fetched successfully!")
-
+    sendResponse(response, response.data, "Neo Feed fetched successfully!");
   } catch (err) {
     next(err);
   }

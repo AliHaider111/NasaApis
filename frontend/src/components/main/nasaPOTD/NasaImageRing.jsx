@@ -84,7 +84,6 @@ const NasaImageRing = () => {
 
   if (loader) return <Loader />;
 
-  console.log(loader, apod);
   return (
     <div className="nasa-wrapper">
       <h1 className="header">

@@ -1,0 +1,64 @@
+.epic-wrapper {
+    padding: 2rem;
+    background: #f5f7fa;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .epic-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #1e2a38;
+  }
+  
+  .epic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  
+  .epic-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  
+  .epic-card:hover {
+    transform: translateY(-6px);
+  }
+  
+  .epic-image {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .epic-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  
+  .epic-caption {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4d6b8a;
+  }
+  
+  .epic-date {
+    font-size: 0.9rem;
+    color: #222;
+  }
+  
+  .epic-coords {
+    font-size: 0.85rem;
+    color: #4d6b8a;
+  }
+  
