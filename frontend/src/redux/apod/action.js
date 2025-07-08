@@ -1,24 +1,27 @@
-import { FETCH_DATA, LOADER, ERROR_STATE } from "../actionTypes";
+import { FETCH_DATA, LOADER_STATE } from "../actionTypes";
 import { toast } from "react-toastify";
-import { apiHelper } from "../axios_intence"
+import { apiHelper } from "../axios_intence";
 
-export const FetchApod = (date) => async (dispatch) => {
+export const FetchApod = () => async (dispatch) => {
   try {
-    let res = await apiHelper("get", `/apod?date=${date}`)
-    if (res?.data) {
-      let { data } = res
-      toast.success(data?.message)
+    dispatch({ type: LOADER_STATE });
+
+    const res = await apiHelper("get", `/nasa/apod`);
+
+    if (res.data) {
+      const { data } = res;
+      toast.success(data.message);
       dispatch({
         type: FETCH_DATA,
-        payload: data
-      })
+        payload: data,
+      });
     }
-    else {
-      dispatch({
-        type: ERROR_STATE
-      })
-    }
+
   } catch (error) {
-    toast.error(error.response.data.message)
+    const message =
+      error?.response?.data?.message;
+    toast.error(message);
+  } finally {
+    dispatch({ type: LOADER_STATE });
   }
-}
+};

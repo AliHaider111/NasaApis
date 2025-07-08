@@ -1,9 +1,9 @@
-import { FETCH_DATA, ERROR_STATE } from '../actionTypes';
+import { FETCH_DATA, LOADER_STATE } from '../actionTypes';
 
 const initialState = {
    apod: {},
    success: false,
-   error: false,
+   loader: false,
 }
 
 const apodReducer = (state = initialState, action) => {
@@ -13,10 +13,10 @@ const apodReducer = (state = initialState, action) => {
             ...state,
             apod: action.payload,
          }
-      case ERROR_STATE:
+      case LOADER_STATE:
          return {
             ...state,
-            error: true
+            loader: !state.loader
          }
       default:
          return state
