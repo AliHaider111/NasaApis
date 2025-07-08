@@ -7,39 +7,67 @@ const compress = require('compression');
 const methodOverride = require('method-override');
 const cors = require('cors');
 const helmet = require('helmet');
+const socketio = require('socket.io');
 
 const routes = require('../api/routes/v1');
 const { logs } = require('./vars');
 const error = require('../api/middlewares/error');
 
-// Express instance
 const app = express();
 const server = http.createServer(app);
 
-// request logging. dev: console | production: file
+// Initialize Socket.io and allow CORS
+global.io = socketio(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
+// Logging requests
 app.use(morgan(logs));
 
-// parse body params and attach to req.body
+// Parse incoming requests
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// gzip compression
+// Enable gzip compression
 app.use(compress());
 
-// lets you use HTTP verbs such as PUT or DELETE
+// Support for PUT/DELETE from forms
 app.use(methodOverride());
 
-// secure apps by setting various HTTP headers
+// Set secure HTTP headers
 app.use(helmet());
 
-// enable CORS
+// Enable CORS
 app.use(cors());
 
+// Global rate limiter
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
-// mount API routes
+// Specific rate limiter for login route
+const limiterLogin = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: 'Too many login attempts, please try again later.',
+  skip: (req) => req.method !== 'POST',
+});
+
+app.use('/v1/users/:userId?', limiterLogin);
+app.use(limiter);
+
+// Mount versioned API routes
 app.use('/v1', routes);
 
-// handle errors
+// Error handling middleware
 app.use(error.converter);
 app.use(error.notFound);
 app.use(error.handler);

@@ -1,8 +1,16 @@
 const express = require('express');
-const apod = require('./apod.route');
+const nasaRoutes = require('./nasa.route');
 
 const router = express.Router();
 
-router.use('/apod', apod);
+/**
+ * Mounts NASA-related API routes at /nasa.
+ *
+ * @module routes/index
+ * @example
+ * GET /nasa/apod
+ * GET /nasa/mars-photos
+ */
+router.use('/nasa', nasaRoutes);
 
 module.exports = router;

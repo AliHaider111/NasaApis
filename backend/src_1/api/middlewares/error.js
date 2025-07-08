@@ -4,14 +4,8 @@ const APIError = require('../errors/api-error');
 const { env } = require('../../config/vars');
 
 /**
- * General error handler middleware.
- * Formats error response and hides stack trace in production.
- *
- * @function
- * @param {Error} err - The error object.
- * @param {Object} req - Express request.
- * @param {Object} res - Express response.
- * @param {Function} next - Express next middleware.
+ * Error handler. Send stacktrace only during development
+ * @public
  */
 const handler = (err, req, res, next) => {
   const response = {
@@ -29,16 +23,9 @@ const handler = (err, req, res, next) => {
   res.json(response);
 };
 exports.handler = handler;
-
 /**
- * Converts non-APIError instances into APIError for uniform handling.
- * Also handles validation errors from express-validation.
- *
- * @function
- * @param {Error} err - Original error.
- * @param {Object} req - Express request.
- * @param {Object} res - Express response.
- * @param {Function} next - Express next middleware.
+ * If error is not an instanceOf APIError, convert it.
+ * @public
  */
 exports.converter = (err, req, res, next) => {
   let convertedError = err;
@@ -62,13 +49,8 @@ exports.converter = (err, req, res, next) => {
 };
 
 /**
- * Handles 404 Not Found errors.
- * Creates an APIError and forwards to the error handler.
- *
- * @function
- * @param {Object} req - Express request.
- * @param {Object} res - Express response.
- * @param {Function} next - Express next middleware.
+ * Catch 404 and forward to error handler
+ * @public
  */
 exports.notFound = (req, res, next) => {
   const err = new APIError({

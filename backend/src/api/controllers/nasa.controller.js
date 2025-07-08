@@ -1,0 +1,154 @@
+const { apiHelper } = require("../utils/helper");
+
+/**
+ * Fetches NASA's Astronomy Picture of the Day (APOD) for a given date.
+ *
+ * @param {Object} req - The Express request object, supports optional `date` query parameter (YYYY-MM-DD).
+ * @param {Object} res - The Express response object used to return the APOD data.
+ *
+ * @async
+ * @function
+ * @throws {Error} Throws an error if the API call to NASA fails.
+ *
+ * @returns {Promise<void>}
+ */
+exports.getApod = async (req, res, next) => {
+  try {
+    const date = req.query.date || new Date().toISOString().split('T')[0];
+    const response = await apiHelper({
+      method: 'get',
+      url: 'https://api.nasa.gov/planetary/apod',
+      params: {
+        api_key: process.env.NASA_API_KEY,
+        date,
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Retrieves Mars Rover photos for a specified sol (Martian day), rover, and optional camera.
+ *
+ * @param {Object} req - The Express request object, supports `rover`, `sol`, and `camera` as query parameters.
+ * @param {Object} res - The Express response object to send back the list of photos.
+ *
+ * @async
+ * @function
+ * @throws {Error} Throws an error if the API call fails or invalid parameters are provided.
+ *
+ * @returns {Promise<void>}
+ */
+exports.getMarsPhotos = async (req, res, next) => {
+  try {
+    const rover = req.query.rover || 'curiosity';
+    const sol = req.query.sol || 1000;
+    const camera = req.query.camera;
+
+    const response = await apiHelper({
+      method: 'get',
+      url: `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos`,
+      params: {
+        api_key: process.env.NASA_API_KEY,
+        sol,
+        ...(camera && { camera }),
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Fetches EPIC (Earth Polychromatic Imaging Camera) natural images for a given Earth date.
+ *
+ * @param {Object} req - The Express request object, supports `date` query parameter (YYYY-MM-DD).
+ * @param {Object} res - The Express response object to send back the EPIC images.
+ *
+ * @async
+ * @function
+ * @throws {Error} Throws an error if the NASA EPIC API call fails.
+ *
+ * @returns {Promise<void>}
+ */
+exports.getEpicImages = async (req, res, next) => {
+  try {
+    const date = req.query.date || new Date().toISOString().split('T')[0];
+    const response = await apiHelper({
+      method: 'get',
+      url: `https://api.nasa.gov/EPIC/api/natural/date/${date}`,
+      params: {
+        api_key: process.env.NASA_API_KEY,
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Retrieves a list of near-earth objects (asteroids) from NASA's NeoWs feed between a start and end date.
+ *
+ * @param {Object} req - The Express request object. Supports `start_date` (required) and `end_date` (optional).
+ * @param {Object} res - The Express response object to send back the list of near-earth objects.
+ *
+ * @async
+ * @function
+ * @throws {Error} Throws an error if the NeoWs API call fails.
+ *
+ * @returns {Promise<void>}
+ */
+exports.getNeoFeed = async (req, res, next) => {
+  try {
+    const start_date = req.query.start_date || new Date().toISOString().split('T')[0];
+    const end_date = req.query.end_date;
+
+    const response = await apiHelper({
+      method: 'get',
+      url: 'https://api.nasa.gov/neo/rest/v1/feed',
+      params: {
+        api_key: process.env.NASA_API_KEY,
+        start_date,
+        ...(end_date && { end_date }),
+      },
+    });
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/**
+ * Searches NASA's Image and Video Library using a keyword query and media type filter.
+ *
+ * @param {Object} req - The Express request object, supports `q` (search query) and `media_type` (image/video/audio).
+ * @param {Object} res - The Express response object to send back the media search results.
+ *
+ * @async
+ * @function
+ * @throws {Error} Throws an error if the media search API fails.
+ *
+ * @returns {Promise<void>}
+ */
+exports.searchMedia = async (req, res, next) => {
+  try {
+    const query = req.query.q || 'moon';
+    const media_type = req.query.media_type || 'image';
+    const response = await apiHelper({
+      method: 'get',
+      url: `https://images-api.nasa.gov/search`,
+      params: {
+        q: query,
+        media_type,
+      },
+    });
+    console.log(query,media_type)
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+};
