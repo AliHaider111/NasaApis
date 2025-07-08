@@ -1,5 +1,5 @@
-const { apiHelper } = require("../utils/helper");
-const {nasa_base_url} = require("../../config/vars")
+const { apiHelper, sendResponse } = require("../utils/helper");
+const { nasa_base_url } = require("../../config/vars");
 
 /**
  * Fetches NASA's Astronomy Picture of the Day (APOD) for a given date.
@@ -15,16 +15,16 @@ const {nasa_base_url} = require("../../config/vars")
  */
 exports.getApod = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split('T')[0];
+    const date = req.query.date || new Date().toISOString().split("T")[0];
     const response = await apiHelper({
-      method: 'get',
+      method: "get",
       url: `${nasa_base_url}/planetary/apod`,
       params: {
         api_key: process.env.NASA_API_KEY,
         date,
       },
     });
-    res.json(response.data);
+    sendResponse(response, response.data, "Apod fetched successfully!")
   } catch (err) {
     next(err);
   }
@@ -44,12 +44,12 @@ exports.getApod = async (req, res, next) => {
  */
 exports.getMarsPhotos = async (req, res, next) => {
   try {
-    const rover = req.query.rover || 'curiosity';
+    const rover = req.query.rover || "curiosity";
     const sol = req.query.sol || 1000;
     const camera = req.query.camera;
 
     const response = await apiHelper({
-      method: 'get',
+      method: "get",
       url: `${nasa_base_url}/mars-photos/api/v1/rovers/${rover}/photos`,
       params: {
         api_key: process.env.NASA_API_KEY,
@@ -57,7 +57,8 @@ exports.getMarsPhotos = async (req, res, next) => {
         ...(camera && { camera }),
       },
     });
-    res.json(response.data);
+    sendResponse(response, response.data, "Mars Photos fetched successfully!")
+
   } catch (err) {
     next(err);
   }
@@ -77,15 +78,16 @@ exports.getMarsPhotos = async (req, res, next) => {
  */
 exports.getEpicImages = async (req, res, next) => {
   try {
-    const date = req.query.date || new Date().toISOString().split('T')[0];
+    const date = req.query.date || new Date().toISOString().split("T")[0];
     const response = await apiHelper({
-      method: 'get',
+      method: "get",
       url: `${nasa_base_url}/EPIC/api/natural/date/${date}`,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
     });
-    res.json(response.data);
+    sendResponse(response, response.data, "Epic Images fetched successfully!")
+
   } catch (err) {
     next(err);
   }
@@ -105,11 +107,12 @@ exports.getEpicImages = async (req, res, next) => {
  */
 exports.getNeoFeed = async (req, res, next) => {
   try {
-    const start_date = req.query.start_date || new Date().toISOString().split('T')[0];
+    const start_date =
+      req.query.start_date || new Date().toISOString().split("T")[0];
     const end_date = req.query.end_date;
 
     const response = await apiHelper({
-      method: 'get',
+      method: "get",
       url: `${nasa_base_url}/neo/rest/v1/feed`,
       params: {
         api_key: process.env.NASA_API_KEY,
@@ -117,9 +120,9 @@ exports.getNeoFeed = async (req, res, next) => {
         ...(end_date && { end_date }),
       },
     });
-    res.json(response.data);
+    sendResponse(response, response.data, "Neo Feed fetched successfully!")
+
   } catch (err) {
     next(err);
   }
 };
-

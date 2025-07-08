@@ -48,3 +48,7 @@ exports.apiHelper = async function (config) {
     }
   }
 };
+
+exports.sendResponse = (res, data, message = "Success", status = 200) => {
+  res.status(status).json({ data, success: true, message });
+};

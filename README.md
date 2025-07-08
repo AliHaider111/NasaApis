@@ -118,7 +118,7 @@ Rate limiting is applied globally and specifically on the login route.
 
 
 👨‍💻 **Author**
-Built by [Muhammad shoaib] – for demo and educational purposes.
+Built by [Arham Irfan] – for demo and educational purposes.
 
 
 
