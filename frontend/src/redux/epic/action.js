@@ -10,10 +10,9 @@ export const FetchEpic = () => async (dispatch) => {
 
         if (res.data) {
             const { data } = res;
-            toast.success(data.message);
             dispatch({
                 type: FETCH_DATA,
-                payload: data,
+                payload: data?.data,
             });
         }
 
