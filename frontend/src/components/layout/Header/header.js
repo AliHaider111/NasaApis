@@ -1,5 +1,6 @@
 import React from "react";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,10 +8,10 @@ const Header = () => {
       <div className="container">
         <h1 className="logo">MyWebsite</h1>
         <nav className="nav-links">
-          <a href="/">Home</a>
-          <a href="/mars-rover">Mars Rover</a>
-          <a href="/earth-polychromatic">Earth Polychromatic</a>
-          <a href="/earth-objects">Near Earth Objects</a>
+          <Link to="/">Home</Link>
+          <Link to="/mars-rover">Mars Rover</Link>
+          <Link to="/earth-polychromatic">Earth Polychromatic</Link>
+          <Link to="/earth-objects">Near Earth Objects</Link>
         </nav>
       </div>
     </header>

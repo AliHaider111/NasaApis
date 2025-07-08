@@ -1,10 +1,8 @@
-import { FETCH_MARS_DATA,LOADER, ERROR_STATE } from '../actionTypes';
+import { FETCH_MARS_DATA, LOADER_STATE } from '../actionTypes';
 
 const initialState = {
-   marsRover: {},
-   success: false,
+   marsRover: [],
    loader: false,
-   error: false,
 }
 
 const marsReducer = (state = initialState, action) => {
@@ -14,11 +12,13 @@ const marsReducer = (state = initialState, action) => {
             ...state,
             marsRover: action.payload,
          }
-      case ERROR_STATE:
+      case LOADER_STATE: {
+         console.log("object")
          return {
             ...state,
-            error: true
+            loader: !state.loader
          }
+      }
       default:
          return state
    }
