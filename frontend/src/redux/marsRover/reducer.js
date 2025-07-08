@@ -13,7 +13,6 @@ const marsReducer = (state = initialState, action) => {
             marsRover: action.payload,
          }
       case LOADER_STATE: {
-         console.log("object")
          return {
             ...state,
             loader: !state.loader
