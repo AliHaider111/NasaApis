@@ -84,15 +84,18 @@ exports.getMarsPhotos = async (req, res, next) => {
  */
 exports.getEpicImages = async (req, res, next) => {
   try {
+    const { type = "natural", date } = req.query;
+
+    const endpoint = `${nasa_base_url}/EPIC/api/${type}${date ? `/date/${date}` : ""}`;
+
     const response = await apiHelper({
       method: "get",
-      url: `${nasa_base_url}/EPIC/api/natural${req.query.date ? `/date/${req.query.date}` : ""
-        }`,
+      url: endpoint,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
     });
-    const data = mapEpicImages(response.data);
+    const data = mapEpicImages(response.data, type);
 
     sendResponse(res, data, "Epic Images fetched successfully!");
   } catch (err) {
