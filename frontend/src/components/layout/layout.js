@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet } from "react-router";
 // __ __ Components/Helpers __ __ //
 import Header from "./Header/header";
