@@ -1,8 +1,65 @@
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-                                            Backend
 
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+                                                                🚀 **NASA Data Explorer** 
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+A full-stack web app that showcases space data using NASA’s Open APIs. Built with React, Redux, Node.js, and Express, it allows users to explore astronomical content like Mars Rover images and the Astronomy Picture of the Day in a beautiful and interactive way.
+
+
+📁 Project Structure
+
+├── frontend/   # React + Redux UI
+├── backend/    # Express API server
+└── README.md
+
+🔧 **Tech Stack**
+
+.  Frontend: React, Redux, React-Bootstrap, Axios, Chart.js, GSAP
+
+.  Backend: Node.js, Express, Axios, CORS, Helmet
+
+.  API: NASA Open APIs
+
+
+🚀 **Features**
+
+.  Browse Astronomy Picture of the Day (APOD)
+
+.  Explore Mars Rover photos
+
+.  Search NASA’s image and video library
+
+.  Interactive UI with animations and charts
+
+.  Responsive design with Bootstrap
+
+.  Loading indicators and error handling
+
+🛠️ **Setup Instructions**
+
+1- Download the repo.
+   . cd nasa-data-explorer
+
+2- NASA API Key
+   . pMIKduA5DaofOo1fQCQv5v70m65t5dqhU5kae6a7  || You may generate your own
+
+4- Run Frontend
+   . cd frontend
+   . npm install
+   . npm start
+
+
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+                                                                        Backend
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
 # 🚀 NASA Data Explorer API

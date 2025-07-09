@@ -1,6 +1,6 @@
 import { FETCH_NEO_DATA, LOADER_STATE } from "../actionTypes";
 import { toast } from "react-toastify";
-import { apiHelper } from "../axios_intence"
+import { apiHelper } from "../../utils/apiHelper"
 
 export const FetchNeo = (query) => async (dispatch) => {
   try {
