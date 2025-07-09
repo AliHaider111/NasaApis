@@ -42,6 +42,15 @@ export default function Filter({
     resetFilters();
   };
 
+  const cameraOptions = [
+    { value: "FHAZ_LEFT_B", label: "Front Hazard Avoidance Camera" },
+    { value: "RHAZ_LEFT_B", label: "Rear Hazard Avoidance Camera" },
+    { value: "CHEMCAM_RMI", label: "Chemistry and Camera Complex" },
+    { value: "MAHLI", label: "Mars Hand Lens Imager" },
+    { value: "MARDI", label: "Mars Descent Imager" },
+    { value: "NAV_RIGHT_B", label: "Navigation Camera" },
+  ];
+
   return (
     <form className="filter-form" onSubmit={handleSubmit}>
       <div className="filter-row">
@@ -68,6 +77,25 @@ export default function Filter({
               value={localFilters.end_date || ""}
               onChange={handleChange}
             />
+          </div>
+        )}
+
+        {filterSet.has("camera") && (
+          <div className="filter-group">
+            <label htmlFor="camera">Camera</label>
+            <select
+              name="camera"
+              id="camera"
+              value={localFilters.camera || ""}
+              onChange={handleChange}
+            >
+              <option value="">Select Camera</option>
+              {cameraOptions.map((cam) => (
+                <option key={cam.value} value={cam.value}>
+                  {cam.label}
+                </option>
+              ))}
+            </select>
           </div>
         )}
 

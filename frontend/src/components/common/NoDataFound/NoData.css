@@ -1,1 +1,6 @@
-.no-data-wrapper{min-height: calc(100vh- 161px);}
+.no-data-wrapper {
+    min-height: calc(100vh - 161px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
