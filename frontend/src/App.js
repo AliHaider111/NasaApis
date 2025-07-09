@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router';
 // __ __ Style Libraries/Components __ __ //
 import TopBarProgress from 'react-topbar-progress-indicator';
 import PageNotFound from './components/common/PageNotFound/PageNotFound.jsx';
+import "./App.css"
 
 
 // Lazy-loaded components

@@ -1,14 +1,13 @@
 .mars-wrapper {
-    padding: 2rem;
+    padding: 60px 0;
     background: #f3f4f7;
-    min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   .mars-title {
     text-align: center;
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
+    font-size: 35px;
+    margin-bottom: 50px;
     color: #2d2d2d;
   }
   
@@ -32,7 +31,7 @@
   
   .mars-image {
     width: 100%;
-    height: 550px;
+    /* height: 550px; */
     object-fit: cover;
     border-bottom: 1px solid #eaeaea;
   }
@@ -45,13 +44,58 @@
   }
   
   .mars-caption {
-    font-size: 1.1rem;
+    font-size: 17px;
     font-weight: 600;
     color: #1d1d1d;
   }
   
   .mars-meta {
-    font-size: 0.9rem;
+    font-size: 14px;
     color: #444;
   }
+  .mars-card-img {
+    width: 100%;
+    height: 320px;
+}
+  .mars-card-img img {
+    width: 100%;
+    height: 100%;
+}
   
+/* responsiveness */
+
+@media (max-width:1399px) {
+  .mars-card-img {
+    height: 300px;
+}  
+.mars-title {
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+}
+@media (max-width:1199px) {
+  .mars-card-img {
+    height: 200px;
+}  
+.mars-title {
+  font-size: 30px;
+}
+.mars-caption {
+  font-size: 15px;
+
+}
+
+.mars-meta {
+  font-size: 12px;
+ 
+}
+.mars-wrapper {padding: 50px 0;}
+}
+
+@media (max-width:767px) {
+  .mars-title {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+.mars-wrapper {padding: 40px 0;}
+}

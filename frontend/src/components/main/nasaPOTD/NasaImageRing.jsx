@@ -86,19 +86,19 @@ const NasaImageRing = () => {
 
   return (
     <div className="nasa-wrapper">
-      <h1 className="header">
+      <h1 className="header mb-4">
         NASA POTD (Picture of the Day) for the Last 10 Days
       </h1>
       <div className="container">
         {imageList[focusedIndex] && (
-          <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <div className="slider-main-img" style={{ textAlign: "center", marginTop: "30px" }}>
             <img
               src={imageList[focusedIndex].url}
               alt=""
               style={{
-                width: "90vw",
-                maxWidth: "1000px",
-                maxHeight: "80vh",
+                // width: "90vw",
+                // maxWidth: "1000px",
+                // maxHeight: "80vh",
                 objectFit: "fill",
                 borderRadius: "12px",
                 boxShadow: "0 8px 24px rgba(0,0,0,0.4)",

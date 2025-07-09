@@ -2,7 +2,7 @@ import NasaImageRing from "../nasaPOTD/NasaImageRing";
 
 const Home = () => {
   return (
-    <div className="App">
+    <div className="nasa-img-wrapper">
       <NasaImageRing />
     </div>
   );
