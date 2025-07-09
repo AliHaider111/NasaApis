@@ -1,22 +1,38 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { FetchEpic } from "../../../redux/epic/action";
 import Loader from "../../common/Loader/Loader";
 import "./EarthPolychromatic.css";
+import Filter from "../../common/Filters/Filter";
+import { resetFilters, setFilters } from "../../../redux/filters/action";
 
 const EarthPolychromatic = () => {
   const dispatch = useDispatch();
   const { epic, loader } = useSelector((state) => state.epic);
+  const componentKey = "earthpolychromatic";
+  const filters = useSelector(
+    (state) => state.filters[componentKey] || {},
+    shallowEqual
+  );
 
   useEffect(() => {
-    dispatch(FetchEpic());
-  }, []);
+    const queryParams = new URLSearchParams(
+      Object.fromEntries(Object.entries(filters).filter(([_, value]) => value))
+    );
+    dispatch(FetchEpic(queryParams));
+  }, [filters]);
 
   if (loader) return <Loader />;
 
   return (
     <div className="epic-wrapper">
       <h1 className="epic-title">🌍 Earth Polychromatic Imagery</h1>
+      <Filter
+        filterTypes={["type", "date"]}
+        filters={filters}
+        setFilters={(f) => dispatch(setFilters(componentKey, f))}
+        resetFilters={() => dispatch(resetFilters(componentKey))}
+      />
       <div className="epic-grid">
         {epic?.map((item) => (
           <div className="epic-card" key={item.identifier}>

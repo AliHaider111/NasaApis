@@ -28,6 +28,7 @@ const EarthObject = () => {
     <div className="neo-wrapper">
       <h1 className="neo-title">☄️ Near Earth Objects</h1>
       <Filter
+        filterTypes={["start_date", "end_date"]}
         filters={filters}
         setFilters={(f) => dispatch(setFilters(componentKey, f))}
         resetFilters={() => dispatch(resetFilters(componentKey))}
