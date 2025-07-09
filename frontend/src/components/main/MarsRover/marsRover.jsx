@@ -38,7 +38,7 @@ const MarsRover = () => {
         <div className="row">
           {marsRover.length > 0 ? (
             marsRover?.map((item) => (
-              <div className="col-lg-4 col-sm-6 mb-md-0 mb-4" key={item.id}>
+              <div className="col-lg-4 col-sm-6 mb-4" key={item.id}>
                 <div className="mars-card">
                   <div className="mars-card-img">
                     <img

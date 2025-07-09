@@ -36,7 +36,7 @@ const EarthPolychromatic = () => {
         setFilters={(f) => dispatch(setFilters(componentKey, f))}
         resetFilters={() => dispatch(resetFilters(componentKey))}
       />
-      <div className="epic-grid">
+      {/* <div className="epic-grid">
         {epic?.map((item) => (
           <div className="epic-card" key={item.identifier}>
             <img
@@ -54,7 +54,8 @@ const EarthPolychromatic = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
+      <NoDataFound />
     
       </Container>
     </div>
