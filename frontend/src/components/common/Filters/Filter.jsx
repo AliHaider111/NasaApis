@@ -24,13 +24,12 @@ export default function Filter({
     e.preventDefault();
     const { start_date, end_date } = localFilters;
 
-    if (
-      filterSet.has("start_date") &&
-      filterSet.has("end_date") &&
-      start_date &&
-      end_date &&
-      new Date(start_date) > new Date(end_date)
-    ) {
+    if (!start_date && end_date) {
+      toast.error("Please provide a start date as well!");
+      return;
+    }
+
+    if (start_date && end_date && new Date(start_date) > new Date(end_date)) {
       toast.error("Start date cannot be after end date!");
       return;
     }

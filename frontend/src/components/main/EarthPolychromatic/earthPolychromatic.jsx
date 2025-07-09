@@ -29,34 +29,36 @@ const EarthPolychromatic = () => {
   return (
     <div className="epic-wrapper">
       <Container>
-      <h1 className="epic-title">🌍 Earth Polychromatic Imagery</h1>
-      <Filter
-        filterTypes={["type", "date"]}
-        filters={filters}
-        setFilters={(f) => dispatch(setFilters(componentKey, f))}
-        resetFilters={() => dispatch(resetFilters(componentKey))}
-      />
-      {/* <div className="epic-grid">
-        {epic?.map((item) => (
-          <div className="epic-card" key={item.identifier}>
-            <img
-              className="epic-image"
-              src={item.imageUrl}
-              alt={item.caption}
-            />
-            <div className="epic-info">
-              <h3 className="epic-caption">{item.caption}</h3>
-              <p className="epic-date">📅 {item.date}</p>
-              <p className="epic-coords">
-                🌐 Lat: {item.centroid_coordinates?.lat}, Lon:{" "}
-                {item.centroid_coordinates?.lon}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div> */}
-      <NoDataFound />
-    
+        <h1 className="epic-title">🌍 Earth Polychromatic Imagery</h1>
+        <Filter
+          filterTypes={["type", "date"]}
+          filters={filters}
+          setFilters={(f) => dispatch(setFilters(componentKey, f))}
+          resetFilters={() => dispatch(resetFilters(componentKey))}
+        />
+        <div className="epic-grid">
+          {epic?.length > 1 ? (
+            epic?.map((item) => (
+              <div className="epic-card" key={item.identifier}>
+                <img
+                  className="epic-image"
+                  src={item.imageUrl}
+                  alt={item.caption}
+                />
+                <div className="epic-info">
+                  <h3 className="epic-caption">{item.caption}</h3>
+                  <p className="epic-date">📅 {item.date}</p>
+                  <p className="epic-coords">
+                    🌐 Lat: {item.centroid_coordinates?.lat}, Lon:{" "}
+                    {item.centroid_coordinates?.lon}
+                  </p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <NoDataFound />
+          )}
+        </div>
       </Container>
     </div>
   );
