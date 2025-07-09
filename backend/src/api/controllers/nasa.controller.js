@@ -84,16 +84,18 @@ exports.getMarsPhotos = async (req, res, next) => {
  */
 exports.getEpicImages = async (req, res, next) => {
   try {
+    const { type = "natural", date } = req.query;
+
+    const endpoint = `${nasa_base_url}/EPIC/api/${type}${date ? `/date/${date}` : ""}`;
+
     const response = await apiHelper({
       method: "get",
-      url: `${nasa_base_url}/EPIC/api/natural${
-        req.query.date ? `/date/${req.query.date}` : ""
-      }`,
+      url: endpoint,
       params: {
         api_key: process.env.NASA_API_KEY,
       },
     });
-    const data = mapEpicImages(response.data);
+    const data = mapEpicImages(response.data, type);
 
     sendResponse(res, data, "Epic Images fetched successfully!");
   } catch (err) {
@@ -115,8 +117,7 @@ exports.getEpicImages = async (req, res, next) => {
  */
 exports.getNeoFeed = async (req, res, next) => {
   try {
-    const start_date =
-      req.query.start_date || new Date().toISOString().split("T")[0];
+    const start_date = req.query.start_date;
     const end_date = req.query.end_date;
 
     const response = await apiHelper({
@@ -124,10 +125,13 @@ exports.getNeoFeed = async (req, res, next) => {
       url: `${nasa_base_url}/neo/rest/v1/feed`,
       params: {
         api_key: process.env.NASA_API_KEY,
-        start_date,
+        ...(start_date && { start_date }),
         ...(end_date && { end_date }),
       },
     });
+
+    response.data
+
     sendResponse(res, response.data, "Neo Feed fetched successfully!");
   } catch (err) {
     next(err);

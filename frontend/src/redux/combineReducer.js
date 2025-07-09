@@ -5,13 +5,15 @@ import { thunk } from 'redux-thunk'
 import marsReducer from "./marsRover/reducer";
 import epicReducer from "./epic/reducer";
 import neoReducer from "./neo/reducer";
+import filterReducer from "./filters/reducer";
 
 const middleware = [thunk]
 const reducer = combineReducers({
   apod: apodReducer,
   mars: marsReducer,
   epic: epicReducer,
-  neo: neoReducer
+  neo: neoReducer,
+  filters: filterReducer
 });
 
 const store = createStore(
