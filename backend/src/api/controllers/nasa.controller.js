@@ -1,4 +1,4 @@
-const { apiHelper, sendResponse, mapEpicImages } = require("../utils/helper");
+const { apiHelper, sendResponse, mapEpicImages, getFormattedDate } = require("../utils/helper");
 const { nasa_base_url } = require("../../config/vars");
 
 /**
@@ -51,16 +51,18 @@ exports.getApod = async (req, res, next) => {
  */
 exports.getMarsPhotos = async (req, res, next) => {
   try {
-    const rover = req.query.rover || "curiosity";
-    const sol = req.query.sol || 1000;
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const earth_date = req.query.date || getFormattedDate(yesterday);
     const camera = req.query.camera;
 
     const response = await apiHelper({
       method: "get",
-      url: `${nasa_base_url}/mars-photos/api/v1/rovers/${rover}/photos`,
+      url: `${nasa_base_url}/mars-photos/api/v1/rovers/curiosity/photos`,
       params: {
         api_key: process.env.NASA_API_KEY,
-        sol,
+        earth_date,
         ...(camera && { camera }),
       },
     });
@@ -129,9 +131,6 @@ exports.getNeoFeed = async (req, res, next) => {
         ...(end_date && { end_date }),
       },
     });
-
-    response.data
-
     sendResponse(res, response.data, "Neo Feed fetched successfully!");
   } catch (err) {
     next(err);
