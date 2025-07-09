@@ -130,8 +130,6 @@ exports.getNeoFeed = async (req, res, next) => {
       },
     });
 
-    response.data
-
     sendResponse(res, response.data, "Neo Feed fetched successfully!");
   } catch (err) {
     next(err);
