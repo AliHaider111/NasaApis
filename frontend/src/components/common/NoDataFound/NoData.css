@@ -1,1 +1,9 @@
-.no-data-wrapper{min-height: calc(100vh- 161px);}
+.no-data-wrapper {
+    min-height: calc(100vh - 161px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffff;
+    box-shadow: 0px 0px 7px 3px #cecece;
+    border-radius: 20px;
+}

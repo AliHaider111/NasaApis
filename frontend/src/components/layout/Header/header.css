@@ -12,6 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 99;
   }
   
   .logo {
@@ -47,7 +48,7 @@
   .header-list a{font-size: 14px;}
 }
 @media (max-width:991px) {
-  .header-list{position: absolute;top: 48px;width: 95%; background-color: #f7f7f7;}
+  .header-list{position: absolute;top: 48px;width: 90%; background-color: #f7f7f7;left: 50%;transform: translateX(-50%);}
   .header-list a {margin-left: 0; padding: 7px 15px;font-size: 13px;}
   .navbar-toggler:focus{box-shadow: unset !important;}
 }

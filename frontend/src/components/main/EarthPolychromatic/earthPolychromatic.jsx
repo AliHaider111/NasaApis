@@ -6,6 +6,7 @@ import "./EarthPolychromatic.css";
 import Filter from "../../common/Filters/Filter";
 import { resetFilters, setFilters } from "../../../redux/filters/action";
 import { Container } from "react-bootstrap";
+import NoDataFound from "../../common/NoDataFound/NoDataFound";
 
 const EarthPolychromatic = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const EarthPolychromatic = () => {
           </div>
         ))}
       </div>
+    
       </Container>
     </div>
   );

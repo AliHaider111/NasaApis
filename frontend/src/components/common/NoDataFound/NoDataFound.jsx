@@ -5,7 +5,9 @@ const NoDataFound = () => {
   
   return (
     <div className="no-data-wrapper">
-        <h2 className="text-center">No data found</h2>
+      
+         <h2 className="text-center">No data found</h2>
+        
     </div>
   );
 };
