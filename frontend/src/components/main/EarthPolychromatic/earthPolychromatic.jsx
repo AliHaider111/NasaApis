@@ -5,6 +5,7 @@ import Loader from "../../common/Loader/Loader";
 import "./EarthPolychromatic.css";
 import Filter from "../../common/Filters/Filter";
 import { resetFilters, setFilters } from "../../../redux/filters/action";
+import { Container } from "react-bootstrap";
 
 const EarthPolychromatic = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const EarthPolychromatic = () => {
 
   return (
     <div className="epic-wrapper">
+      <Container>
       <h1 className="epic-title">🌍 Earth Polychromatic Imagery</h1>
       <Filter
         filterTypes={["type", "date"]}
@@ -52,6 +54,7 @@ const EarthPolychromatic = () => {
           </div>
         ))}
       </div>
+      </Container>
     </div>
   );
 };

@@ -39,6 +39,9 @@
 .header-list a:hover{
   color: #58a6ff;
 }
+.header-list .nav-link.active{
+  color: #58a6ff;
+}
 
 @media (max-width:1399px) {
   .header-list a{font-size: 14px;}

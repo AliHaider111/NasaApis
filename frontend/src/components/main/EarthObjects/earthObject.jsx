@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import "./EarthObject.css";
 import Filter from "../../common/Filters/Filter";
 import { resetFilters, setFilters } from "../../../redux/filters/action";
+import { Container } from "react-bootstrap";
 
 const EarthObject = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const EarthObject = () => {
 
   return (
     <div className="neo-wrapper">
+      <Container>
       <h1 className="neo-title">☄️ Near Earth Objects</h1>
       <Filter
         filterTypes={["start_date", "end_date"]}
@@ -75,6 +77,7 @@ const EarthObject = () => {
             </div>
           </div>
         ))}
+        </Container>
     </div>
   );
 };
